@@ -31,8 +31,7 @@ class Neighborhood {
     }
 
     meals(){
-        let myMeals = new Set (Customer.prototype.meals.call(this))
-        return Array.from(myMeals)
+        return [...new Set (Customer.prototype.meals.call(this))]
     }
 }
 
