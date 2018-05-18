@@ -1,5 +1,10 @@
 // global datastore
-let store = { neighborhoods: [], meals: [], customers: [], deliveries: [] };
+let store = {
+  neighborhoods: [],
+  meals: [],
+  customers: [],
+  deliveries: []
+};
 
 let neighborhoodId = 0;
 class Neighborhood {
@@ -19,11 +24,11 @@ class Neighborhood {
     })
   }
 
-  meals(){
-      let arr = this.deliveries().map(delivery =>{
-          return delivery.meal();
-      });
-      return [...new Set(arr)]
+  meals() {
+    let arr = this.deliveries().map(delivery => {
+      return delivery.meal();
+    });
+    return [...new Set(arr)]
   }
 }
 
@@ -42,12 +47,12 @@ class Customer {
     })
   }
   meals() {
-      return this.deliveries().map(delivery => delivery.meal());
-    }
+    return this.deliveries().map(delivery => delivery.meal());
+  }
 
   totalSpent() {
-      return this.meals().reduce((total, meal) => (total += meal.price), 0);
-    }
+    return this.meals().reduce((total, meal) => (total += meal.price), 0);
+  }
 
 }
 
@@ -70,13 +75,13 @@ class Meal {
   }
 
   customers() {
-     const customers = this.deliveries().map(delivery => delivery.customer());
-     return [...new Set(customers)];
-   }
+    const customers = this.deliveries().map(delivery => delivery.customer());
+    return [...new Set(customers)];
+  }
 
   static byPrice() {
-     return store.meals.sort((a, b) => a.price < b.price);
-   }
+    return store.meals.sort((a, b) => a.price < b.price);
+  }
 };
 
 
@@ -92,22 +97,22 @@ class Delivery {
     store.deliveries.push(this);
   }
 
-meal() {
-  const meal =  store.meals.find( meal => meal.id === this.mealId )
-  return meal
-  // this
-  // return store.deliveries.find(delivery => {
-  //   debugger
-  //   return delivery.id === this.id
-  // })
-}
+  meal() {
+    const meal = store.meals.find(meal => meal.id === this.mealId)
+    return meal
+    // this
+    // return store.deliveries.find(delivery => {
+    //   debugger
+    //   return delivery.id === this.id
+    // })
+  }
 
-customer() {
-  const customer =  store.customers.find( customer => customer.id === this.customerId )
-  return customer
-}
-neighborhood() {
-  const neighborhood =  store.neighborhoods.find( neighborhood => neighborhood.id === this.neighborhoodId )
-  return neighborhood
-}
+  customer() {
+    const customer = store.customers.find(customer => customer.id === this.customerId)
+    return customer
+  }
+  neighborhood() {
+    const neighborhood = store.neighborhoods.find(neighborhood => neighborhood.id === this.neighborhoodId)
+    return neighborhood
+  }
 }
